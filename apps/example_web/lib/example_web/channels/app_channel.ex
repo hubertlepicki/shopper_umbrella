@@ -16,9 +16,9 @@ defmodule ExampleWeb.AppChannel do
     {:noreply, socket}
   end
 
-  def handle_in("input_text", %{"value" => new_text, "version" => client_version}, socket) do
+  def handle_in("text_input", %{"value" => new_text, "version" => client_version}, socket) do
     new_socket = socket
-                 |> assign(:state, %{socket.assigns.state | input_text: String.downcase(new_text || "")})
+                 |> assign(:state, %{socket.assigns.state | text_input: String.downcase(new_text || "")})
                  |> assign(:version, next_version(socket.assigns.version, client_version))
 
     push(new_socket, "state_diff", %{version: new_socket.assigns.version, diff: JSONDiff.diff(socket.assigns.state, new_socket.assigns.state)})
@@ -32,7 +32,7 @@ defmodule ExampleWeb.AppChannel do
 
   defp init_state() do
     %{
-      input_text: ""
+      text_input: ""
     }
   end
 

@@ -1,37 +1,52 @@
 import * as React from 'react';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useLayoutEffect} from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { useChannel } from './use_channel';
 import { PhoenixSocketProvider } from './phoenix_socket_context';
 import * as jsondiffpatch from "rfc6902";
 
-const Form = ({state, changed, clientVersion, serverVersion}) => {
-  const [optimistic, setOptimistic] = useState({value: state.input_text});
+const Form = ({state, onInputChange, clientVersion, serverVersion}) => {
+  return (
+    <div>
+      <label>Enter some text:</label>
+      <OptimisticTextarea onChange={(e) => onInputChange("text_input", e.target.value)} value={state.text_input} clientVersion={clientVersion} serverVersion={serverVersion} />
+    </div>
+  );
+}
+
+const OptimisticTextarea = ({onChange, value, clientVersion, serverVersion}) => {
+  const [optimisticValue, setOptimisticValue] = useState(value);
   const didMountRef = useRef(false);
+  const [cursorPosition, setCursorPosition] = useState(null);
+  const inputRef = useRef(null);
+
 
   useEffect(() => {
     if (didMountRef.current) {
       if (clientVersion <= serverVersion + 1 ) {
-        setOptimistic({value: state.input_text})
+        setOptimisticValue(value)
       }
     } else {
       didMountRef.current = true;
     }
   }, [serverVersion]);
 
-  const setValue = (value) => {
-    setOptimistic({value: value})
-    changed(value)
+  useLayoutEffect(() => {
+    if (didMountRef.current && inputRef.current && cursorPosition !== null) {
+      inputRef.current.setSelectionRange(cursorPosition, cursorPosition)
+    }
+  }, [optimisticValue, serverVersion]);
+
+  const handleChange = (e) => {
+    setOptimisticValue(e.target.value);
+    setCursorPosition(e.target.selectionStart);
+    onChange(e);
   }
 
-  return (
-    <div className="App">
-      <label>Enter some text:</label>
-      <textarea onChange={(e) => setValue(e.target.value)} value={optimistic.value}></textarea>
-    </div>
-  );
+  return(
+    <textarea ref={inputRef} onChange={(e) => handleChange(e)} value={optimisticValue}></textarea>
+  )
 }
-
 export const Main = () => {
   const [channel] = useChannel("app:state");
   const [appState, setAppState] = useState();
@@ -64,14 +79,14 @@ export const Main = () => {
     };
   }, [channel]);
 
-  const onFormChanged = (value) => {
+  const onInputChange = (field, value) => {
     setClientVersion((clientVersion) => clientVersion + 2);
-    channel.push("input_text", {value: value, version: clientVersion});
+    channel.push(field, {value: value, version: clientVersion});
   }
 
   return(
     <div>
-      { appState && <Form changed={onFormChanged} state={appState} clientVersion={clientVersion} serverVersion={serverVersion} />}
+      { appState && <Form onInputChange={onInputChange} state={appState} clientVersion={clientVersion} serverVersion={serverVersion} />}
       <h4>Current appState is:</h4>
       <pre>
         { JSON.stringify(appState) }
