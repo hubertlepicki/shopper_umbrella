@@ -9,14 +9,14 @@
 # move said applications out of the umbrella.
 import Config
 
-config :example_web,
-  generators: [context_app: :example]
+config :shopper_web,
+  generators: [context_app: :shopper]
 
 # Configures the endpoint
-config :example_web, ExampleWeb.Endpoint,
+config :shopper_web, ShopperWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: ExampleWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Example.PubSub,
+  render_errors: [view: ShopperWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Shopper.PubSub,
   live_view: [signing_salt: "ePYXJZ86"]
 
 # Configure esbuild (the version is required)
@@ -25,7 +25,7 @@ config :esbuild,
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/example_web/assets", __DIR__),
+    cd: Path.expand("../apps/shopper_web/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 

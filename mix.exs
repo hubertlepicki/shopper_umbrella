@@ -1,4 +1,4 @@
-defmodule Example.Umbrella.MixProject do
+defmodule Shopper.Umbrella.MixProject do
   use Mix.Project
 
   def project do
@@ -19,7 +19,7 @@ defmodule Example.Umbrella.MixProject do
   #
   #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
   #
-  # Type "mix help deps" for more examples and options.
+  # Type "mix help deps" for more shoppers and options.
   #
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps/ folder.
@@ -28,7 +28,7 @@ defmodule Example.Umbrella.MixProject do
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to install project dependencies and perform other setup tasks, run:
+  # For shopper, to install project dependencies and perform other setup tasks, run:
   #
   #     $ mix setup
   #

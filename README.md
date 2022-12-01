@@ -1,1 +1,1 @@
-# Example.Umbrella
+# Shopper.Umbrella

@@ -20,68 +20,68 @@ doc
 # Also ignore archive artifacts (built via "mix archive.build").
 **/*.ez
 
-# Temporary files, for example, from tests.
+# Temporary files, for shopper, from tests.
 tmp
 
 
 
-# flyctl launch added from apps/example/.gitignore
+# flyctl launch added from apps/shopper/.gitignore
 # The directory Mix will write compiled artifacts to.
-apps/example/_build
+apps/shopper/_build
 
 # If you run "mix test --cover", coverage assets end up here.
-apps/example/cover
+apps/shopper/cover
 
 # The directory Mix downloads your dependencies sources to.
-apps/example/deps
+apps/shopper/deps
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
-apps/example/doc
+apps/shopper/doc
 
 # Ignore .fetch files in case you like to edit your project deps locally.
-apps/example/.fetch
+apps/shopper/.fetch
 
 # If the VM crashes, it generates a dump, let's ignore it too.
-apps/example/**/erl_crash.dump
+apps/shopper/**/erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
-apps/example/**/*.ez
+apps/shopper/**/*.ez
 
 # Ignore package tarball (built via "mix hex.build").
-apps/example/**/example-*.tar
+apps/shopper/**/shopper-*.tar
 
-# flyctl launch added from apps/example_web/.gitignore
+# flyctl launch added from apps/shopper_web/.gitignore
 # The directory Mix will write compiled artifacts to.
-apps/example_web/_build
+apps/shopper_web/_build
 
 # If you run "mix test --cover", coverage assets end up here.
-apps/example_web/cover
+apps/shopper_web/cover
 
 # The directory Mix downloads your dependencies sources to.
-apps/example_web/deps
+apps/shopper_web/deps
 
 # Where 3rd-party dependencies like ExDoc output generated docs.
-apps/example_web/doc
+apps/shopper_web/doc
 
 # Ignore .fetch files in case you like to edit your project deps locally.
-apps/example_web/.fetch
+apps/shopper_web/.fetch
 
 # If the VM crashes, it generates a dump, let's ignore it too.
-apps/example_web/**/erl_crash.dump
+apps/shopper_web/**/erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
-apps/example_web/**/*.ez
+apps/shopper_web/**/*.ez
 
 # Ignore package tarball (built via "mix hex.build").
-apps/example_web/**/example_web-*.tar
+apps/shopper_web/**/shopper_web-*.tar
 
 # Ignore assets that are produced by build tools.
-#apps/example_web/priv/static/assets
+#apps/shopper_web/priv/static/assets
 
 # Ignore digested assets cache.
-#apps/example_web/priv/static/cache_manifest.json
+#apps/shopper_web/priv/static/cache_manifest.json
 
 # In case you use Node.js/npm, you want to ignore these.
-apps/example_web/**/npm-debug.log
-apps/example_web/assets/node_modules
+apps/shopper_web/**/npm-debug.log
+apps/shopper_web/assets/node_modules
 
