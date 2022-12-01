@@ -48,7 +48,9 @@ defmodule ExampleWeb.MixProject do
       {:gettext, "~> 0.18"},
       {:example, in_umbrella: true},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:json_patch, "~> 0.8.0"},
+      {:json_diff, "~> 0.1.3"},
     ]
   end
 

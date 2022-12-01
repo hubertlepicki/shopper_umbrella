@@ -1,0 +1,87 @@
+# flyctl launch added from .gitignore
+# The directory Mix will write compiled artifacts to.
+_build
+
+# If you run "mix test --cover", coverage assets end up here.
+cover
+
+# The directory Mix downloads your dependencies sources to.
+deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+doc
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+**/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+**/*.ez
+
+# Temporary files, for example, from tests.
+tmp
+
+
+
+# flyctl launch added from apps/example/.gitignore
+# The directory Mix will write compiled artifacts to.
+apps/example/_build
+
+# If you run "mix test --cover", coverage assets end up here.
+apps/example/cover
+
+# The directory Mix downloads your dependencies sources to.
+apps/example/deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+apps/example/doc
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+apps/example/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+apps/example/**/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+apps/example/**/*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+apps/example/**/example-*.tar
+
+# flyctl launch added from apps/example_web/.gitignore
+# The directory Mix will write compiled artifacts to.
+apps/example_web/_build
+
+# If you run "mix test --cover", coverage assets end up here.
+apps/example_web/cover
+
+# The directory Mix downloads your dependencies sources to.
+apps/example_web/deps
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+apps/example_web/doc
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+apps/example_web/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+apps/example_web/**/erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+apps/example_web/**/*.ez
+
+# Ignore package tarball (built via "mix hex.build").
+apps/example_web/**/example_web-*.tar
+
+# Ignore assets that are produced by build tools.
+#apps/example_web/priv/static/assets
+
+# Ignore digested assets cache.
+#apps/example_web/priv/static/cache_manifest.json
+
+# In case you use Node.js/npm, you want to ignore these.
+apps/example_web/**/npm-debug.log
+apps/example_web/assets/node_modules
+
