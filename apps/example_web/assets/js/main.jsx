@@ -5,11 +5,11 @@ import { useChannel } from './use_channel';
 import { PhoenixSocketProvider } from './phoenix_socket_context';
 import * as jsondiffpatch from "rfc6902";
 
-const Form = ({state, onInputChange, clientVersion, serverVersion}) => {
+const Form = ({state, pushMessage, clientVersion, serverVersion}) => {
   return (
     <div>
       <label>Enter some text:</label>
-      <OptimisticTextarea onChange={(e) => onInputChange("text_input", e.target.value)} value={state.text_input} clientVersion={clientVersion} serverVersion={serverVersion} />
+      <OptimisticTextarea onChange={(e) => pushMessage("text_input:changed", e.target.value)} value={state.text_input} clientVersion={clientVersion} serverVersion={serverVersion} />
     </div>
   );
 }
@@ -79,14 +79,14 @@ export const Main = () => {
     };
   }, [channel]);
 
-  const onInputChange = (field, value) => {
+  const pushMessage = (key, value) => {
     setClientVersion((clientVersion) => clientVersion + 2);
-    channel.push(field, {value: value, version: clientVersion});
+    channel.push(key, {value: value, version: clientVersion});
   }
 
   return(
     <div>
-      { appState && <Form onInputChange={onInputChange} state={appState} clientVersion={clientVersion} serverVersion={serverVersion} />}
+      { appState && <Form pushMessage={pushMessage} state={appState} clientVersion={clientVersion} serverVersion={serverVersion} />}
       <h4>Current appState is:</h4>
       <pre>
         { JSON.stringify(appState) }
