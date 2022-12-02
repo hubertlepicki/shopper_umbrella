@@ -66,7 +66,7 @@ export const StateChannelProvider = ({ channelName, children }) => {
 
   const pushMessage = (key, value) => {
     setClientVersion((clientVersion) => clientVersion + 2);
-    channel.push(key, {value: value, version: clientVersion});
+    channel.push("_SCMSG:"+key, {value: value, version: clientVersion});
   }
 
   if (!channel) return null;

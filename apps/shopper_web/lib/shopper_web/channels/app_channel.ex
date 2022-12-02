@@ -1,16 +1,17 @@
 defmodule ShopperWeb.AppChannel do
-  use StateChannel, channel: "app:state"
+  use StateChannel
 
-  @impl StateChannel
-  def init_state(_socket) do
-    %{
-      text_input: ""
-    }
+  def join(topic, _message, socket) do
+    {:ok, assign(socket, :state, %{text_input: ""})}
+  end
+
+  def join(__otherwise, _params, _socket) do
+    {:error, %{reason: "unauthorized"}}
   end
 
   @impl StateChannel
   def on_message("text_input:changed", new_text, socket) do
-    socket 
+    socket
     |> assign(:state, %{socket.assigns.state | text_input: String.downcase(new_text || "")})
   end
 end
