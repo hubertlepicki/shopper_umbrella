@@ -77,27 +77,8 @@ defmodule StateChannel do
         # TODO: dedub below
 
         @impl Phoenix.Channel
-        def handle_in("_SCMSG:" <> key, %{"value" => value, "version" => client_version}, socket) do
-          new_socket =
-            socket
-            |> Phoenix.Socket.assign(
-              :version,
-              StateChannel.Helpers.next_version(socket.assigns.version, client_version)
-            )
-
-          new_socket =
-            if function_exported?(__MODULE__, :on_message, 3) do
-              on_message(key, value, new_socket)
-            else
-              new_socket
-            end
-
-          push(new_socket, "state_diff", %{
-            version: new_socket.assigns.version,
-            diff: JSONDiff.diff(socket.assigns.state, new_socket.assigns.state)
-          })
-
-          {:noreply, new_socket}
+        def handle_in("_SCMSG:" <> _key = msg, payload, socket) do
+          StateChannel.handle_in(__MODULE__, msg, payload, socket)
         end
 
         @impl Phoenix.Channel
@@ -108,27 +89,8 @@ defmodule StateChannel do
     else
       quote do
         @impl Phoenix.Channel
-        def handle_in("_SCMSG:" <> key, %{"value" => value, "version" => client_version}, socket) do
-          new_socket =
-            socket
-            |> Phoenix.Socket.assign(
-              :version,
-              StateChannel.Helpers.next_version(socket.assigns.version, client_version)
-            )
-
-          new_socket =
-            if function_exported?(__MODULE__, :on_message, 3) do
-              on_message(key, value, new_socket)
-            else
-              new_socket
-            end
-
-          push(new_socket, "state_diff", %{
-            version: new_socket.assigns.version,
-            diff: JSONDiff.diff(socket.assigns.state, new_socket.assigns.state)
-          })
-
-          {:noreply, new_socket}
+        def handle_in("_SCMSG:" <> _key = msg, payload, socket) do
+          StateChannel.handle_in(__MODULE__, msg, payload, socket)
         end
       end
     end
@@ -141,6 +103,29 @@ defmodule StateChannel do
     })
 
     {:noreply, socket}
+  end
+
+  def handle_in(mod, "_SCMSG:" <> key, %{"value" => value, "version" => client_version}, socket) do
+    new_socket =
+      socket
+      |> Phoenix.Socket.assign(
+        :version,
+        StateChannel.Helpers.next_version(socket.assigns.version, client_version)
+      )
+
+    new_socket =
+      if function_exported?(mod, :on_message, 3) do
+        apply(mod, :on_message, [key, value, new_socket])
+      else
+        new_socket
+      end
+
+    Phoenix.Channel.push(new_socket, "state_diff", %{
+      version: new_socket.assigns.version,
+      diff: JSONDiff.diff(socket.assigns.state, new_socket.assigns.state)
+    })
+
+    {:noreply, new_socket}
   end
 
   defmodule Helpers do
