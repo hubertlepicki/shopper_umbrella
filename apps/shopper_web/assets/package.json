@@ -4,6 +4,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rfc6902": "^5.0.1",
-    "state_channel_react": "amberbit/state_channel_react"
+    "state_channel_react": "^0.0.1"
   }
 }
