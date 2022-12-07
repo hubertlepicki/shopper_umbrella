@@ -11,7 +11,7 @@ defmodule ShopperWeb.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -49,8 +49,7 @@ defmodule ShopperWeb.MixProject do
       {:shopper, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:json_patch, "~> 0.8.0"},
-      {:json_diff, "~> 0.1.3"}
+      {:state_channel, path: "/home/hubert/Projekty/amberbit/state_channel/state_channel"}
     ]
   end
 
