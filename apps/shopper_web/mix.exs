@@ -49,7 +49,7 @@ defmodule ShopperWeb.MixProject do
       {:shopper, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:state_channel, path: "/home/hubert/Projekty/amberbit/state_channel/state_channel"}
+      {:state_channel, "~> 0.0.2"}
     ]
   end
 
