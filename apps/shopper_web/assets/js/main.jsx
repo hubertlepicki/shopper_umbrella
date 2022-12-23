@@ -90,7 +90,7 @@ const Seed = () => {
   </div>)
 }
 
-export const Main = () => {
+const Main = () => {
   return(
     <PhoenixSocketProvider>
       <StateChannelProvider topic="app:state">
@@ -108,7 +108,10 @@ export const Main = () => {
 }
 
 window.addEventListener("load", () => {
-  const root = ReactDOM.createRoot(document.getElementById("main"));
-  root.render(<Main />)
+  const main = document.getElementById("main-state_channel");
+  if (main) {
+    const root = ReactDOM.createRoot(main);
+    root.render(<Main />)
+  }
 })
 

@@ -18,6 +18,7 @@ defmodule ShopperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/storex_test", PageController, :storex
   end
 
   # Other scopes may use custom stacks.

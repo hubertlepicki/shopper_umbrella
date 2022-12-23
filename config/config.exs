@@ -17,7 +17,16 @@ config :shopper_web, ShopperWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: ShopperWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Shopper.PubSub,
-  live_view: [signing_salt: "ePYXJZ86"]
+  live_view: [signing_salt: "ePYXJZ86"],
+  http: [
+    dispatch: [
+      {:_,
+       [
+         {"/storex", Storex.Socket.Handler, []},
+         {:_, Phoenix.Endpoint.Cowboy2Handler, {ShopperWeb.Endpoint, []}}
+       ]}
+    ]
+  ]
 
 # Configure esbuild (the version is required)
 config :esbuild,

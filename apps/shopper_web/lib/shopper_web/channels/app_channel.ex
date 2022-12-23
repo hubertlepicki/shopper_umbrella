@@ -28,7 +28,7 @@ defmodule ShopperWeb.AppChannel do
   end
 
   @impl StateChannel
-  def on_message("new_item:save", value, socket) do
+  def on_message("new_item:save", _, socket) do
     if socket.assigns.state["new_item"]["error"] == nil do
       socket
       |> patch_state(:remove, "/new_item")

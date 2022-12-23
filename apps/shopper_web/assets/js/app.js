@@ -45,3 +45,5 @@ import "phoenix_html"
 
 import "./main";
 
+import "./main_storex";
+

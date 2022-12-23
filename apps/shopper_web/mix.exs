@@ -49,7 +49,8 @@ defmodule ShopperWeb.MixProject do
       {:shopper, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:state_channel, "~> 0.0.2"}
+      {:state_channel, "~> 0.0.2"},
+      {:storex, "~> 0.2.4"}
     ]
   end
 
