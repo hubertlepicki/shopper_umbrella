@@ -26,7 +26,7 @@ const Item = ({item}) => {
       {item.title}
     </li>
   )
-}
+};
 
 const MemoItem = React.memo(Item)
 

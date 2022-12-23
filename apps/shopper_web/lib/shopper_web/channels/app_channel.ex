@@ -60,9 +60,8 @@ defmodule ShopperWeb.AppChannel do
   def on_message("toggle_purchased", value, socket) do
     item_index = socket.assigns.state["list"] |> Enum.find_index(&(&1["id"] == value))
     current_item = socket.assigns.state["list"] |> Enum.at(item_index)
-    new_item = %{current_item | "purchased" => !current_item["purchased"]}
 
-    socket |> patch_state(:replace, "/list/#{item_index}", new_item)
+    socket |> patch_state(:replace, "/list/#{item_index}/purchased", !current_item["purchased"])
   end
 
   defp maybe_error(""), do: "can't be blank!"
